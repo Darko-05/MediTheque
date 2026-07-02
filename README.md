@@ -44,20 +44,22 @@ Le projet a été réalisé afin de mettre en pratique la programmation orienté
 * PostgreSQL
 * HTML5
 * Tailwind CSS
+* Node.js
+* npm
 
 ---
 
 ## Structure du projet
 
 ```
-classes/          Classes métier  
-config/           Configuration de la base de données  
-includes/         Fonctions et variables globales  
-interface/        Interfaces PHP  
-public/           Ressources publiques (CSS)  
-repositories/     Accès aux données  
-src/              Sources Tailwind CSS  
-uploads/          Images des méditations  
+classes/        Classes métier  
+config/         Configuration de la base de données + fichiers SQL  
+includes/       Fonctions et variables globales  
+interface/      Interfaces PHP  
+public/         Ressources publiques (CSS)  
+repositories/   Accès aux données  
+src/            Sources Tailwind CSS  
+uploads/        Images des méditations  
 ```
 
 ---
@@ -66,7 +68,7 @@ uploads/          Images des méditations
 
 * PHP 8 ou supérieur
 * PostgreSQL
-* Nodejs
+* Node.js
 * npm
 
 ---
@@ -85,7 +87,7 @@ git clone https://github.com/Darko-05/MediTheque.git
 cd MediTheque
 ```
 
-### 3. Installer Tailwind CSS
+### 3. Installer les dépendances
 
 ```bash
 npm install
@@ -110,12 +112,31 @@ Créer la base de données :
 ```sql
 CREATE DATABASE meditheque;
 ```
-Les tables doivent ensuite être importées depuis le dossier config/ (fichiers SQL fournis dans le projet).
 
-Table :
+Les tables doivent ensuite être importées depuis le dossier `config/` (fichiers SQL fournis dans le projet).
+
+Tables :
 
 * utilisateurs
 * meditations
+
+---
+
+## Compilation du CSS 
+
+Avant de lancer le projet, il faut générer le CSS :
+
+### En développement
+
+```bash
+npm run dev
+```
+
+### En production
+
+```bash
+npm run build
+```
 
 ---
 
@@ -131,22 +152,6 @@ Puis ouvrir :
 
 ```
 http://localhost:8000
-```
-
----
-
-## Compilation de Tailwind CSS
-
-En développement :
-
-```bash
-npm run dev
-```
-
-Pour la production :
-
-```bash
-npm run build
 ```
 
 ---
