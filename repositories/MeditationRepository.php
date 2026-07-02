@@ -23,7 +23,9 @@
                 SELECT * FROM meditations WHERE id = :id;
             ");
             $stmt->execute([":id" => $id]);
-            return $stmt->fetch(\PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            return $result === false ? null : $result;
         }
 
         public function findByCategorie(string $categorie):array

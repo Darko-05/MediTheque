@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="public/css/style.css">
-
 <?php
 
     require_once __DIR__. "/config/Database.php";
@@ -11,7 +9,7 @@
 
     if (!isset($_GET['id']) || !filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
         echo "Une erreur s'est produite, veuillez réessayer !";
-        return;
+        exit();
     } else {
         $id = $_GET['id'];
         try {
@@ -33,9 +31,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="public/css/style.css">
     <title><?= $thinking->getTitre() ?></title>
 </head>
 <body>
+
+<?php require_once "header.php" ?>
 
 <div class="max-w-7xl mx-auto px-6 py-10">
 
@@ -75,6 +76,14 @@
     <div class="text-sm text-gray-500 mb-4">
         <?= $meditation["vues"] ?> vues
     </div>
+
+    <?php if (isset($_SESSION["is_connected"], $_SESSION["role"]) && $_SESSION["role"] === "auteur") : ?>
+    <a href="modifier-meditation.php?id=<?= $meditation["id"] ?>"
+       class="inline-block bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">
+        Modifier
+    </a>
+    <?php endif; ?>
+
 
 </div>
 

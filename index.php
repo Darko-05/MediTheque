@@ -39,6 +39,8 @@
 </head>
 <body>
 
+<?php require_once "header.php" ?>
+
 <div class="max-w-7xl mx-auto px-6 py-10">
 
     <form action="index.php" method="post" enctype="multipart/form-data"

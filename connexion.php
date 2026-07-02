@@ -9,7 +9,12 @@
 
         $email = $_POST["email"];
         $password = $_POST["mot_de_passe"];
-        $remember = $_POST["remember"];
+
+        $remember = null;
+
+        if (isset($_POST["remember"])) {
+            $remember = $_POST["remember"];
+        }
 
         $pdo = Database::getConnection();
         $userRepository = new \repositories\UtilisateurRepository($pdo);
@@ -28,8 +33,17 @@
                     ]
                 );
             }
+            if (!isset($_SESSION["email"], $_SESSION["mot_de_passe"])) {
+                $_SESSION["email"] = $email;
+                $_SESSION["mot_de_passe"] = $password;
+            }
+
+            $_SESSION["is_connected"] = true;
+            $_SESSION["role"] = $findEmail["role"];
+
             header("Location: index.php");
             exit();
+
         } else {
             echo "<p class='text-red-600 font-medium'>Email ou Mot de passe incorrect, Veuillez réessayer</p>";
         }
@@ -83,8 +97,8 @@
                 class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 value="<?php
                     if (isset($_SESSION["mot_de_passe"])) {
-                        echo $_SESSION["mot_de_passe"];
-                } ?>"
+                        echo $_SESSION["mot_de_passe"];}
+                    ?>"
             >
         </div>
 
